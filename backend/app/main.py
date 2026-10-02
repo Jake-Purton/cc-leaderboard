@@ -65,17 +65,17 @@ async def health():
 async def list_players():
     async with pool.connection() as conn:
         cur = await conn.execute(
-            "SELECT id, name, seconds FROM players ORDER BY seconds ASC, name ASC"
+            "SELECT id, name, seconds FROM players ORDER BY seconds DESC, name ASC"
         )
         return await cur.fetchall()
 
 
 @app.post("/api/leaderboard", status_code=201)
 async def submit_time(player: PlayerIn):
-    """Add a time. If the name is already on the board, keep whichever time is faster."""
+    """Add a time. If the name is already on the board, keep whichever time is longer."""
     return await fetch_one(
         """INSERT INTO players (name, seconds) VALUES (%s, %s)
-           ON CONFLICT (name) DO UPDATE SET seconds = LEAST(players.seconds, EXCLUDED.seconds)
+           ON CONFLICT (name) DO UPDATE SET seconds = GREATEST(players.seconds, EXCLUDED.seconds)
            RETURNING id, name, seconds""",
         (player.name, player.seconds),
     )

@@ -2,7 +2,7 @@
 
 A login-free company board with two pages:
 
-- **Leaderboard**: submit times (minutes:seconds). Fastest first, and each person keeps their best time.
+- **Leaderboard**: submit times (minutes:seconds). Longest first, and each person keeps their best (longest) time.
 - **Post-its**: stick coloured notes on a shared wall and drag them around.
 
 It uses a Vite + React frontend, a FastAPI backend and PostgreSQL. Pages refresh every

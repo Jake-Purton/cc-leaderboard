@@ -65,7 +65,7 @@ export default function Leaderboard() {
         </span>
         <button className="primary">Add</button>
       </form>
-      <p className="hint">Fastest time wins. Submitting a name again keeps their best time.</p>
+      <p className="hint">Longest time wins. Submitting a name again keeps their best time.</p>
       {error && <p className="error">{error}</p>}
 
       {players.length === 0 ? (
